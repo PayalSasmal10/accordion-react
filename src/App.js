@@ -6,7 +6,7 @@ import Fetch from "./Fetch.json";
 function App() {
   const [inputChangeTitle, setinputChangeTitle] = useState();
   const [inputChangeDescr, setinputChangeDescr] = useState();
-  const [isOpen, setIsOpen] = useState();
+  const [isOpen, setIsOpen] = useState([]);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function App() {
     setinputChangeDescr(e.target.value);
   };
 
-  const addItemsHandler = (e) => {
+  const addItemsHandler = () => {
     // setInputChange(items);
     const newItems = { title: inputChangeTitle, description: inputChangeDescr };
     setItems([...items, newItems]);
@@ -33,7 +33,14 @@ function App() {
     setItems(newItems);
   }
 
-  const isOpenHandler = (id) => {};
+  const isOpenHandler = (id) => {
+    console.log(id);
+    if(isOpen.includes(id)){
+      setIsOpen(isOpen.filter((item) => item !== id));
+    }else{
+      setIsOpen([...isOpen, id]);
+    }
+  };
 
   return (
     <div className="App">
@@ -41,10 +48,11 @@ function App() {
         return (
           <div key={id} className="parent">
             <button className="accordion">{val.title}</button>
-            <span className="openingButton">+</span>
+            {<span className="openingButton" onClick={() => isOpenHandler(id)}>{isOpen.includes(id) ?"-":"+"}</span>}
             <div className="panel">
+             {isOpen.includes(id) && <div>
               <button className="deleteButton" onClick={() => deleteItemsHandler(id)} >Delete</button>
-              <p className="description">{val.description}</p>
+              <p className="description">{val.description}</p> </div>}
             </div>
           </div>
         );

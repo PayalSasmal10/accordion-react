@@ -21,6 +21,7 @@
   position: relative;
   right: 38px;
   color: white;
+  cursor: pointer;
 }
 
 .panel{
