@@ -6,7 +6,7 @@ import Fetch from "./Fetch.json";
 function App() {
   const [inputChangeTitle, setinputChangeTitle] = useState();
   const [inputChangeDescr, setinputChangeDescr] = useState();
-
+  const [isOpen, setIsOpen] = useState();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -23,11 +23,17 @@ function App() {
 
   const addItemsHandler = (e) => {
     // setInputChange(items);
-    const newItems = {title : inputChangeTitle, description: inputChangeDescr};
+    const newItems = { title: inputChangeTitle, description: inputChangeDescr };
     setItems([...items, newItems]);
   };
 
+  const deleteItemsHandler = (id) => {
+    const newItems = [...items];
+    newItems.splice(id, 1);
+    setItems(newItems);
+  }
 
+  const isOpenHandler = (id) => {};
 
   return (
     <div className="App">
@@ -37,6 +43,7 @@ function App() {
             <button className="accordion">{val.title}</button>
             <span className="openingButton">+</span>
             <div className="panel">
+              <button className="deleteButton" onClick={() => deleteItemsHandler(id)} >Delete</button>
               <p className="description">{val.description}</p>
             </div>
           </div>
@@ -50,7 +57,6 @@ function App() {
             placeholder="enter title"
             name="title"
             onChange={titleInputChangeHandler}
-            
           />
         </div>
         <div className="textArea">
@@ -62,7 +68,9 @@ function App() {
             onChange={descInputChangeHandler}
           />
         </div>
-        <button className="addButton" onClick={addItemsHandler}>Add</button>
+        <button className="addButton" onClick={addItemsHandler}>
+          Add
+        </button>
       </div>
     </div>
   );

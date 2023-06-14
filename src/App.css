@@ -28,6 +28,15 @@
   margin: auto;
 }
 
+.deleteButton {
+  cursor: pointer;
+  position: relative;
+  left: 330px;
+  background-color: green;
+  color: white;
+  margin-top: 5px;
+}
+
 p{
   display: -webkit-box;
   justify-content: center;
