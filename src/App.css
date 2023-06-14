@@ -38,18 +38,24 @@ p{
 }
 
 .footer {
-  display: flex;
+  /* display: block; */
   justify-content: center;
   text-align: center;
   padding-top: 40px;
 }
 
 textarea{
+  max-width: 700vw;
   width: 700px;
+}
+
+.textArea{
+  padding-top: 10px;
 }
 
 .addButton{
   background-color: green;
   font-size: 16px;
   color: white;
+  cursor: pointer;
 }

@@ -1,11 +1,37 @@
 // import logo from "./logo.svg";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Fetch from "./Fetch.json";
 
 function App() {
+  const [inputChangeTitle, setinputChangeTitle] = useState();
+  const [inputChangeDescr, setinputChangeDescr] = useState();
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setItems(Fetch);
+  }, []);
+
+  const titleInputChangeHandler = (e) => {
+    setinputChangeTitle(e.target.value);
+  };
+
+  const descInputChangeHandler = (e) => {
+    setinputChangeDescr(e.target.value);
+  };
+
+  const addItemsHandler = (e) => {
+    // setInputChange(items);
+    const newItems = {title : inputChangeTitle, description: inputChangeDescr};
+    setItems([...items, newItems]);
+  };
+
+
+
   return (
     <div className="App">
-      {Fetch.map((val, id) => {
+      {items.map((val, id) => {
         return (
           <div key={id} className="parent">
             <button className="accordion">{val.title}</button>
@@ -17,8 +43,26 @@ function App() {
         );
       })}
       <div className="footer">
-        <textarea type="textarea" className="inputTextArea" />
-        <button className="addButton">Add</button>
+        <div className="textArea">
+          <textarea
+            type="textarea"
+            className="inputTextArea"
+            placeholder="enter title"
+            name="title"
+            onChange={titleInputChangeHandler}
+            
+          />
+        </div>
+        <div className="textArea">
+          <textarea
+            type="textarea"
+            className="inputTextArea"
+            placeholder="enter description"
+            name="description"
+            onChange={descInputChangeHandler}
+          />
+        </div>
+        <button className="addButton" onClick={addItemsHandler}>Add</button>
       </div>
     </div>
   );
